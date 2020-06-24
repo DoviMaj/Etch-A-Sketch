@@ -1,0 +1,22 @@
+#parent-div{
+  position: absolute;
+  margin: 70px;
+  border-style: solid;
+  border-color: red;
+  border-width: 20px;
+}
+#grid-element{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+.big{
+
+}
+.medium{
+
+}
+.small{
+  
+}
