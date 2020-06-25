@@ -36,7 +36,7 @@ resetButton.addEventListener('click', function(){
 })
 
 
-let reset = function(){
+function reset(){
   div.childNodes.forEach(function(gridElement){
     gridElement.style.backgroundColor = '';      
   })
@@ -54,15 +54,15 @@ ul.appendChild(colorInputElement);
 ul.appendChild(resetButton);
 
 let colorInput = 'black';
-let colorHandler = function(){
+function colorHandler(){
   div.childNodes.forEach(function(gridElement){
     gridElement.addEventListener('mouseenter', function(event){
       event.target.style.backgroundColor = colorInput;
     })
   })
 }
-
-let gridSizeHandler = function(){
+gridSizeHandler();
+function gridSizeHandler(){
   if(div.className === 'bigger'){
     gridSize = 2000;
   }
@@ -82,7 +82,7 @@ let gridSizeHandler = function(){
   colorHandler();
   reset();
 }
-gridSizeHandler();
+
 
 // v2 requirements
 // add reset button (x)
