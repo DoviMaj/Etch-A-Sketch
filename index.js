@@ -1,26 +1,22 @@
 let div = document.querySelector('div');
+let ul = document.querySelector('ul')
 div.id = 'parent-div'
-div.className = 'small';
+div.className = 'bigger';
 let gridSize = '';
 
 let sizeBigChoice = document.createElement('button');
-sizeBigChoice.innerHTML = 'Big';
+sizeBigChoice.innerHTML = 'Bigger';
+sizeBigChoice.className = 'upper-buttons';
 sizeBigChoice.addEventListener('click', function(event){
   div.className = event.target.innerHTML.toLowerCase();
   gridSizeHandler();
   reset();
 })
 
-let sizeMediumChoice = document.createElement('button');
-sizeMediumChoice.innerHTML = 'Medium';
-sizeMediumChoice.addEventListener('click', function(event){
-  div.className = event.target.innerHTML.toLowerCase();
-  gridSizeHandler();
-  reset();
-})
 
 let sizeSmallChoice = document.createElement('button');
-sizeSmallChoice.innerHTML = 'Small';
+sizeSmallChoice.innerHTML = 'Smaller';
+sizeSmallChoice.className = 'upper-buttons';
 sizeSmallChoice.addEventListener('click', function(event){
   div.className = event.target.innerHTML.toLowerCase();
   gridSizeHandler();
@@ -28,32 +24,34 @@ sizeSmallChoice.addEventListener('click', function(event){
 })
 
 
-div.parentNode.appendChild(sizeBigChoice);
-div.parentNode.appendChild(sizeMediumChoice);
-div.parentNode.appendChild(sizeSmallChoice);
+ul.appendChild(sizeBigChoice);
+ul.appendChild(sizeSmallChoice);
 
-let gridSizeHandler = function(){
-  if(div.className === 'big'){
-    gridSize = 7000;
-  }
-  if(div.className === 'medium'){
-    gridSize = 5000;
-  }
-  if(div.className === 'small'){
-    gridSize = 2000;
-  }
-  div.childNodes.forEach(function(gridElement){
-    gridElement.remove();
-  })
-
-  for(var i =0; i < gridSize; i++){
-    let gridElement = document.createElement('div');
-    gridElement.id = 'grid-element';
-    div.appendChild(gridElement);
-  }
-  colorHandler();
+let resetButton = document.createElement('button');
+resetButton.innerHTML = 'Clear';
+resetButton.id = 'reset-button'
+resetButton.className = 'upper-buttons';
+resetButton.addEventListener('click', function(){
   reset();
+})
+
+
+let reset = function(){
+  div.childNodes.forEach(function(gridElement){
+    gridElement.style.backgroundColor = '';      
+  })
 }
+
+let colorInputElement = document.createElement('input');
+colorInputElement.type = 'text';
+colorInputElement.placeholder = 'type your color'
+colorInputElement.value = 'black';
+colorInputElement.className = 'upper-buttons';
+colorInputElement.addEventListener('mouseleave', function(event){
+    colorInput = event.target.value.toLowerCase();
+})
+ul.appendChild(colorInputElement);
+ul.appendChild(resetButton);
 
 let colorInput = 'black';
 let colorHandler = function(){
@@ -64,46 +62,31 @@ let colorHandler = function(){
   })
 }
 
-let resetButton = '';
-let reset = function(){
-  let resetButton = document.createElement('button');
-  resetButton.innerHTML = 'Clear';
-  resetButton.id = 'reset-button'
-  resetButton.addEventListener('click', function(){
+let gridSizeHandler = function(){
+  if(div.className === 'bigger'){
+    gridSize = 2000;
+  }
+  if(div.className === 'smaller'){
+    gridSize = 500;
+  }
+
   div.childNodes.forEach(function(gridElement){
-    gridElement.style.backgroundColor = '';
-    })
+    gridElement.remove();
   })
-  div.parentNode.appendChild(resetButton);
+  
+  for(var i =0; i < gridSize; i++){
+    let gridElement = document.createElement('div');
+    gridElement.id = 'grid-element';
+    div.appendChild(gridElement);
+  }
+  colorHandler();
+  reset();
 }
-
-
-
-let colorInputElement = document.createElement('input');
-colorInputElement.type = 'text';
-colorInputElement.placeholder = 'type your color'
-colorInputElement.value = '';
-colorInputElement.addEventListener('mouseleave', function(event){
-  //if(event.keyCode === 13){
-    colorInput = event.target.value
-  //}
-})
-div.parentNode.appendChild(colorInputElement);
-
-
-
-
-
-
-
-
-
-
-
+gridSizeHandler();
 
 // v2 requirements
 // add reset button (x)
 // give color options (x)
 // give random color option ()
 
-// give size options big, medium small ()
+// give size options big, medium small (x)
