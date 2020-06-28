@@ -79,7 +79,7 @@ let colorInput = 'black';
 function colorHandler(){
   debugger
   div.childNodes.forEach(function(gridElement){
-    gridElement.addEventListener('click', (event) => {
+    gridElement.addEventListener('mousedown', (event) => {
       mouseOver();
       addColor(event);
     }
@@ -87,7 +87,7 @@ function colorHandler(){
   function mouseOver(){
     div.childNodes.forEach(function(gridElement){
       gridElement.addEventListener('mouseover', addColor)
-      gridElement.addEventListener('dblclick', removeMouseOver)
+      gridElement.addEventListener('mouseup', removeMouseOver)
     })
   }
   function addColor(event){
