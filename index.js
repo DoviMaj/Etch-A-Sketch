@@ -13,7 +13,6 @@ sizeBigChoice.addEventListener('click', function(event){
   reset();
 })
 
-
 let sizeSmallChoice = document.createElement('button');
 sizeSmallChoice.innerHTML = 'Smaller';
 sizeSmallChoice.className = 'upper-buttons';
@@ -44,23 +43,17 @@ function reset(){
 
 let colorInputElement = document.createElement('input');
 colorInputElement.type = 'text';
-colorInputElement.placeholder = 'type your color'
+colorInputElement.placeholder = 'color, random or eraser'
 colorInputElement.value = 'black';
 colorInputElement.className = 'upper-buttons';
-colorInputElement.addEventListener('mouseleave', function(event){
+colorInputElement.addEventListener('blur', function(event){
     colorInput = event.target.value.toLowerCase();
 })
+
 ul.appendChild(colorInputElement);
 ul.appendChild(resetButton);
 
-let colorInput = 'black';
-function colorHandler(){
-  div.childNodes.forEach(function(gridElement){
-    gridElement.addEventListener('mouseenter', function(event){
-      event.target.style.backgroundColor = colorInput;
-    })
-  })
-}
+
 gridSizeHandler();
 function gridSizeHandler(){
   if(div.className === 'bigger'){
@@ -80,13 +73,52 @@ function gridSizeHandler(){
     div.appendChild(gridElement);
   }
   colorHandler();
-  reset();
+}
+
+let colorInput = 'black';
+function colorHandler(){
+  debugger
+  div.childNodes.forEach(function(gridElement){
+    gridElement.addEventListener('click', (event) => {
+      mouseOver();
+      addColor(event);
+    }
+  )})
+  function mouseOver(){
+    div.childNodes.forEach(function(gridElement){
+      gridElement.addEventListener('mouseover', addColor)
+      gridElement.addEventListener('dblclick', removeMouseOver)
+    })
+  }
+  function addColor(event){
+    if(colorInput === 'random'){
+      event.target.style.backgroundColor = randomColor();
+    } 
+    if(colorInput === 'eraser'){
+      event.target.style.backgroundColor = 'white';
+    }
+    else{
+      event.target.style.backgroundColor = colorInput;
+    }
+  }
+  function removeMouseOver(){
+    div.childNodes.forEach(function(gridElement){
+      gridElement.removeEventListener('mouseover', addColor);
+    })
+  }
+  function randomColor(){
+    let rgb = [generateRandom(), generateRandom(), generateRandom()];
+    function generateRandom(){
+      return Math.floor(Math.random() * 226)
+    }
+    return `rgb(${rgb})`;
+  }
 }
 
 
-// v2 requirements
-// add reset button (x)
-// give color options (x)
-// give random color option ()
 
-// give size options big, medium small (x)
+
+// v3 requirements
+
+// give random color option (x)
+// make event change when clicking and double clicking(x)

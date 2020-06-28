@@ -1,9 +1,10 @@
 body{
   text-align: center;
+  user-select: none;
 }
 
 #parent-div{
-  width: 900px;
+  width: 700px;
   display: inline-block;
   border-style: solid;
   border-color: lightgrey;
@@ -30,6 +31,9 @@ ul{
 
 footer{
   color: gray;
+  margin: 10px;
+}
+p{
   margin: 10px;
 }
 a{
