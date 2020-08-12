@@ -77,7 +77,6 @@ function gridSizeHandler(){
 
 let colorInput = 'black';
 function colorHandler(){
-  debugger
   div.childNodes.forEach(function(gridElement){
     gridElement.addEventListener('mousedown', (event) => {
       mouseOver();
@@ -117,8 +116,3 @@ function colorHandler(){
 
 
 
-
-// v3 requirements
-
-// give random color option (x)
-// make event change when clicking and double clicking(x)
